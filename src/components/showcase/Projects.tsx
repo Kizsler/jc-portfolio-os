@@ -69,9 +69,9 @@ const Projects: React.FC<ProjectsProps> = (props) => {
                     route="websites"
                 />
                 <ProjectBox
-                    title="AI Automations"
+                    title="Software"
                     subtitle="PROJECTS"
-                    route="ai-automations"
+                    route="software"
                 />
                 <ProjectBox
                     title="Social Media"

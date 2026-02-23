@@ -64,10 +64,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         <p>
                             Built custom client websites and implemented AI automation systems
                             that streamlined workflows, reduced operational overhead, and
-                            eliminated resource inefficiencies—directly boosting client ROI.{' '}
-                            <a href="#" style={{color: '#0066cc', textDecoration: 'underline'}}>
-                                See AI Automations
-                            </a>
+                            eliminated resource inefficiencies—directly boosting client ROI.
                         </p>
                     </li>
                 </ul>

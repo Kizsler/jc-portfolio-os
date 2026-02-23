@@ -49,56 +49,19 @@ const Contact: React.FC<ContactProps> = (props) => {
         }
     }, [email, name, message]);
 
-    async function submitForm() {
+    function submitForm() {
         if (!isFormValid) {
             setFormMessage('Form unable to validate, please try again.');
             setFormMessageColor('red');
             return;
         }
-        try {
-            setIsLoading(true);
-            const res = await fetch(
-                'https://api.henryheffernan.com/api/contact',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        company,
-                        email,
-                        name,
-                        message,
-                    }),
-                }
-            );
-            // the response will be either {success: true} or {success: false, error: message}
-            const data = (await res.json()) as
-                | {
-                      success: false;
-                      error: string;
-                  }
-                | { success: true };
-            if (data.success) {
-                setFormMessage(`Message successfully sent. Thank you ${name}!`);
-                setCompany('');
-                setEmail('');
-                setName('');
-                setMessage('');
-                setFormMessageColor(colors.blue);
-                setIsLoading(false);
-            } else {
-                setFormMessage(data.error);
-                setFormMessageColor(colors.red);
-                setIsLoading(false);
-            }
-        } catch (e) {
-            setFormMessage(
-                'There was an error sending your message. Please try again.'
-            );
-            setFormMessageColor(colors.red);
-            setIsLoading(false);
-        }
+        const subject = company
+            ? `Portfolio Contact from ${name} (${company})`
+            : `Portfolio Contact from ${name}`;
+        const body = `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n\n${message}`;
+        window.location.href = `mailto:jc@wearescallywag.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setFormMessage(`Opening email client. Thank you ${name}!`);
+        setFormMessageColor(colors.blue);
     }
 
     useEffect(() => {
